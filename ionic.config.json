@@ -1,0 +1,7 @@
+{
+  "name": "front-iatradingbot2",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
