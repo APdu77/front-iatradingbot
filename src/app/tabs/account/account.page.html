@@ -1,0 +1,202 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Compte</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="account$.value.email; else noInfo">
+    <ion-card-header>
+      <ion-card-title>Informations</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-icon name="at-circle" slot="start" size="large"></ion-icon>
+          <ion-label>{{ account$.value.email }}</ion-label>
+          <ion-button slot="end" color="warning" class="btn" id="toCap" shape="round"
+          routerLink="/changeEmail">
+            Modifier ✎
+          </ion-button>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="keypad" slot="start" size="large"></ion-icon>
+          <ion-label> ••••••••••••••• </ion-label>
+
+          <ion-button
+          shape="round"
+            id="toCap"
+            slot="end"
+            color="warning"
+            class="btn"
+            routerLink="/changePassword">
+            Modifier ✎
+          </ion-button>
+        </ion-item>
+
+        <ion-accordion-group>
+          <ion-accordion value="accountId">
+            <ion-item slot="header" color="light">
+              <ion-thumbnail slot="start">
+                <ion-img
+                  alt="Binance logo"
+                  src="../../../assets/icon/binance.png"></ion-img>
+              </ion-thumbnail>
+              <ion-icon
+                name="finger-print"
+                slot="start"
+                size="large"></ion-icon>
+              <ion-label
+                *ngIf="account$.value.binanceAccountId!==null &&
+                account$.value.binanceAccountId!==undefined; 
+                else noId">Binance Account Id :<br />{{
+                account$.value.binanceAccountId
+                }}</ion-label>
+              <ng-template #noId>Binance Account Id :<br />non saisi</ng-template>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <ion-item>
+                <form [formGroup]="idForm" (ngSubmit)="editBinanceId(idForm)">
+                  <ion-item>
+                    <ion-input
+                      label="New Id"
+                      labelPlacement="fixed"
+                      labelSlot="start"
+                      fill="outline"
+                      formControlName="accountId"
+                      [clearOnEdit]="true"
+                      placeholder="Enter id"
+                      [clearInput]="true">
+                    </ion-input>
+
+                    <ion-button
+                    shape="round"
+                      slot="end"
+                      color="success"
+                      size="medium"
+                      type="submit"
+                      [disabled]="idForm.invalid">
+                      Valider ✔︎
+                    </ion-button>
+                  </ion-item>
+                </form>
+              </ion-item>
+            </div>
+          </ion-accordion>
+          <ion-accordion value="apiKey">
+            <ion-item slot="header" color="light">
+              <ion-thumbnail slot="start">
+                <ion-img
+                  alt="Binance logo"
+                  src="../../../assets/icon/binance.png"></ion-img>
+              </ion-thumbnail>
+              <ion-icon name="key" slot="start" size="large"></ion-icon>
+              <ion-label
+                *ngIf="account$.value.binanceApiKey!==null &&
+                account$.value.binanceApiKey!==undefined;
+                else noApiKey">
+                Binance API key :<br />{{ account$.value.binanceApiKey }}
+              </ion-label>
+              <ng-template #noApiKey>Binance API key :<br />non saisie</ng-template>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <ion-item>
+                <form
+                  [formGroup]="apiKeyForm"
+                  (ngSubmit)="editBinanceApiKey(apiKeyForm)">
+                  <ion-item>
+                    <ion-input
+                      label="New API key"
+                      labelPlacement="fixed"
+                      labelSlot="start"
+                      fill="outline"
+                      slot="start"
+                      formControlName="apiKey"
+                      [clearOnEdit]="true"
+                      placeholder="Enter key"
+                      [clearInput]="true">
+                    </ion-input>
+
+                    <ion-button
+                    shape="round"
+                      slot="end"
+                      color="success"
+                      size="medium"
+                      type="submit"
+                      [disabled]="apiKeyForm.invalid">
+                      Valider ✔︎
+                    </ion-button>
+                  </ion-item>
+
+                  <ion-item> </ion-item>
+                </form>
+              </ion-item>
+            </div>
+          </ion-accordion>
+
+          <ion-accordion value="secretKey">
+            <ion-item slot="header" color="light">
+              <ion-thumbnail slot="start">
+                <ion-img
+                  alt="Binance logo"
+                  src="../../../assets/icon/binance.png"></ion-img>
+              </ion-thumbnail>
+              <ion-icon
+                name="shield-checkmark"
+                slot="start"
+                size="large"></ion-icon>
+              <ion-icon name="key" slot="start" size="large"></ion-icon>
+              <ion-label
+                *ngIf="account$.value.isApiSecretSet==true; else
+                noSecretKey">•••••••••••••••</ion-label>
+              <ng-template #noSecretKey>Binance Secret key :<br />non saisie</ng-template>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <ion-item>
+                <form
+                  [formGroup]="ApiSecretForm"
+                  (ngSubmit)="editBinanceSecretKey(ApiSecretForm)">
+                  <ion-item>
+                    <ion-input
+                      label="New Secret key"
+                      labelPlacement="fixed"
+                      labelSlot="start"
+                      fill="outline"
+                      slot="start"
+                      formControlName="secretKey"
+                      [clearOnEdit]="true"
+                      placeholder="Enter key"
+                      [clearInput]="true">
+                    </ion-input>
+
+                    <ion-button
+                    shape="round"
+                      slot="end"
+                      color="success"
+                      size="medium"
+                      type="submit"
+                      [disabled]="ApiSecretForm.invalid">
+                      Valider ✔︎
+                    </ion-button>
+                  </ion-item>
+                </form>
+              </ion-item>
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <ng-template #noInfo>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Informations inaccessibles</ion-card-title>
+      </ion-card-header>
+    </ion-card>
+  </ng-template>
+  <ion-button shape="round" color="danger" (click)="logout()">Logout</ion-button>
+</ion-content>

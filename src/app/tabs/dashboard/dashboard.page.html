@@ -1,0 +1,50 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-menu-button></ion-menu-button>
+		</ion-buttons>
+		<ion-title>Dashboard</ion-title>
+		<ion-item slot="end">
+			<ion-thumbnail slot="start">
+				<ion-img src="../../../assets/icon/btc.png"></ion-img>
+			</ion-thumbnail>
+			BTC {{ btcPrice$.value.lastPrice | currency : 'EUR' : 'symbol' : '1.0-0' : 'fr' }} & 
+			{{ btcPrice$.value.priceChangePercent!/100 | percent : '1.2-2' : 'fr-FR' }}<br />
+		</ion-item>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="account$.value.suspended == false; else inactive">
+	
+	<ion-content >
+		
+		<ion-grid [fixed]="true">
+			<ion-row>
+			  <ion-col>Devise/Crypto</ion-col>
+			  <ion-col>Disponible</ion-col>
+			  <ion-col>Valeur en BTC</ion-col>
+			</ion-row>
+			<ion-row *ngFor="let currency of account$.value.wallet">
+				<ion-col>{{currency.asset}}</ion-col>
+				<ion-col>{{currency.free}}</ion-col>
+				<ion-col>{{currency.btcValuation}}</ion-col>
+			  </ion-row>
+		  </ion-grid>
+	</ion-content>
+	
+</ion-content>
+<ng-template #inactive>
+	<ion-content>
+		<br />
+		<ion-card>
+			<ion-card-header>
+				<ion-card-title id="inactive" color="warning">
+					Compte en attente d'activation par votre parrain !
+				</ion-card-title>
+			</ion-card-header>
+			<ion-card-content id="inactiveInfo">
+				Les autres onglets de l'application sont cependant accessibles.
+			</ion-card-content>
+		</ion-card>
+	</ion-content>
+</ng-template>

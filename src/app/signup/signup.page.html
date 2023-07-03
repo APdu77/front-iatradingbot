@@ -1,0 +1,151 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        id="toCap"
+        color="primary"
+        defaultHref="/login"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Créez votre compte CryptoEcoloApp</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form
+    id="formUpMargin"
+    [formGroup]="newAccountForm"
+    (ngSubmit)="onSubmit(newAccountForm)">
+    <ion-item>
+      <ion-input
+        label="Entrez votre adresse email"
+        labelPlacement="floating"
+        fill="outline"
+        type="email"
+        id="email"
+        formControlName="email"
+        [clearInput]="true">
+      </ion-input>
+      <span class="error ion-padding"
+        *ngIf="newAccountForm.controls['email'].errors?.['pattern'] &&
+        newAccountForm.controls['email'].dirty && newAccountForm.controls['confirmEmail'].dirty">
+        Veuillez saisir une adresse email dans un format valide.
+      </span>
+    </ion-item>
+
+    <ion-item id="inputMargin">
+      <ion-input
+        label="Confirmez votre adresse email"
+        labelPlacement="floating"
+        fill="outline"
+        type="email"
+        id="confirmEmail"
+        formControlName="confirmEmail"
+        [clearInput]="true">
+      </ion-input>
+      <span
+        class="error ion-padding"
+        *ngIf="newAccountForm.controls['email'].dirty &&
+        newAccountForm.controls['confirmEmail'].errors?.['mustMatch']">
+        La confirmation de l'adresse mail ne matche pas.<br />
+        Retapez-la ici.
+      </span>
+    </ion-item>
+    <ion-accordion-group id="accordion">
+      <ion-accordion value="reminder">
+        <ion-item slot="header" color="light" lines="full">
+          <ion-icon
+            color="warning"
+            name="information-circle"
+            slot="start"
+            size="large"></ion-icon>
+          <ion-label>Rappel des règles concernant les mots de passe</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <ion-item>
+            Votre mot de passe doit contenir entre 12 et 255 caractères dont :<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- une lettre minuscule<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- une lettre MAJUSCULE<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- un chiffre<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- un des caractères spéciaux suivants
+            !"#$%&\'*+,-./:;\&lt;=&gt;?@^_&#123;|&#125;~
+            <br />&nbsp;
+          </ion-item>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+    <ion-item>
+      <ion-input
+        label="Entrez votre mot de passe"
+        labelPlacement="floating"
+        fill="outline"
+        type="password"
+        id="password"
+        formControlName="password"
+        [counter]="true"
+        maxlength="255"
+        [clearInput]="true">
+      </ion-input>
+    </ion-item>
+
+    <ion-item id="inputMargin2">
+      <ion-input
+        label="Confirmez votre mot de passe"
+        labelPlacement="floating"
+        type="password"
+        id="confirmPassword"
+        formControlName="confirmPassword"
+        fill="outline"
+        [counter]="true"
+        maxlength="255"
+        [clearInput]="true">
+      </ion-input>
+      <span
+        class="error ion-padding"
+        *ngIf="newAccountForm.controls['password'].dirty &&
+        newAccountForm.controls['confirmPassword'].errors?.['mustMatch']">
+        La confirmation du mot de passe ne matche pas.<br />
+        Retapez-la ici.
+      </span>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-button
+        id="toCap"
+        expand="block"
+        size="default"
+        type="submit"
+        [disabled]="newAccountForm.invalid || account$.value.validatedMail == false">
+        Créer&nbsp;
+        <span id="toLower"> votre compte </span>
+      </ion-button>
+    </ion-item>
+  </form>
+
+  <form
+    *ngIf="account$.value.validatedMail == false"
+    id="formUpMargin"
+    [formGroup]="verificationForm"
+    (ngSubmit)="onVerify(verificationForm)">
+    <ion-item>
+      <ion-input
+        label="Entrez le code de vérification"
+        labelPlacement="floating"
+        fill="outline"
+        type="text"
+        id="validationKey"
+        formControlName="validationKey"
+        [clearInput]="true">
+      </ion-input>
+      <ion-button
+        color="success"
+        slot="end"
+        id="toCap"
+        expand="block"
+        size="default"
+        type="submit"
+        [disabled]="verificationForm.invalid">
+        Vérifier&nbsp;
+        <span id="toLower"> le code </span>
+      </ion-button>
+    </ion-item>
+  </form>
+</ion-content>

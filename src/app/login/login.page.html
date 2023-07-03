@@ -1,0 +1,105 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Connexion à votre compte CryptoEcoloApp</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-fab slot="fixed" vertical="top" horizontal="end" [edge]="true">
+    <ion-fab-button title="Menu">
+      <ion-icon name="Menu"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="bottom">
+      <ion-fab-button title="A propos" routerLink="/tabs/about">
+        <ion-icon name="information-circle" size="large"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)">
+    <ion-item lines="inset">
+      <ion-input
+        label="Identifiant"
+        labelPlacement="floating"
+        fill="solid"
+        type="email"
+        id="email"
+        formControlName="email"
+        placeholder="Entrez votre Email"
+        [clearInput]="true">
+      </ion-input>
+      <span class="error ion-padding" *ngIf="isSubmitted &&
+        loginForm.controls['email'].errors?.['required']">
+        Une adresse email est requise.
+      </span>
+      <span class="error ion-padding" *ngIf="isSubmitted &&
+        loginForm.controls['email'].errors?.['pattern']">
+        Veuillez saisir une adresse email dans un format valide.
+      </span>
+    </ion-item>
+
+    <ion-item lines="inset" >
+      <ion-input
+        label="Mot de passe"
+        labelPlacement="floating"
+        [counter]="true"
+        fill="solid"
+        type="password"
+        id="password"
+        formControlName="password"
+        placeholder="Entrez votre mot de passe"
+        maxlength="255">
+      </ion-input>
+      <span class="error ion-padding" *ngIf="isSubmitted &&
+        loginForm.controls['password'].errors?.['required']">
+        Un mot de passe est requis.
+      </span>
+      <span class="error ion-padding" *ngIf="isSubmitted &&
+        loginForm.controls['password'].errors?.['pattern']">
+        Pour rappel, votre mot de passe contient entre 12 et 255 caractères dont
+        :<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- une lettre en minuscules<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- une lettre en MAJUSCULES<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- un chiffre<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- un des caractères spéciaux
+        suivants !"#$%&\'*+,-./:;\&lt;=&gt;?@^_&#123;|&#125;~
+      </span>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-button
+        id="toCap"
+        expand="block"
+        shape="round"
+        size="default"
+        type="submit">
+        Se&nbsp;
+        <span id="toLower">
+          connecter
+        </span>
+        <ion-icon slot="end" name="log-in"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </form>
+
+  <ion-item>
+    <a href="/login/newpassword">
+      Mot de passe oublié
+    </a><!--  -->
+  </ion-item>
+
+  <ion-item lines="none">
+    <ion-button
+      id="toCap"
+      routerLink="/signup"
+      color="success"
+      shape="round"
+      size="default"
+      type="button">
+      Créer&nbsp;
+      <span id="toLower">
+        nouveau compte
+      </span>
+    </ion-button>
+  </ion-item>
+</ion-content>

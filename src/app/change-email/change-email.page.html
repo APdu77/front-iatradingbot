@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        id="toCap"
+        color="primary"
+        defaultHref="/tabs/account"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Modification de votre adresse email</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form
+    id="formUpMargin"
+    [formGroup]="changeEmailForm"
+    (ngSubmit)="onSubmit(changeEmailForm)">
+    <ion-item>
+      <ion-input
+        label="Nouvelle adresse email"
+        labelPlacement="floating"
+        fill="outline"
+        type="text"
+        id="email"
+        formControlName="email"
+        [clearInput]="true">
+      </ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-button
+        id="toCap"
+        expand="block"
+        size="default"
+        type="submit"
+        [disabled]="changeEmailForm.invalid || account$.value.previousEmail">
+        Valider&nbsp;
+      </ion-button>
+    </ion-item>
+  </form>
+
+  <form
+    *ngIf="account$.value.previousEmail"
+    id="formUpMargin"
+    [formGroup]="verificationForm"
+    (ngSubmit)="onVerify(verificationForm)">
+    <ion-item>
+      <ion-input
+        label="Entrez le code de vérification"
+        labelPlacement="floating"
+        fill="outline"
+        type="text"
+        id="validationKey"
+        formControlName="validationKey"
+        [clearInput]="true">
+      </ion-input>
+      <ion-button
+        color="success"
+        slot="end"
+        id="toCap"
+        expand="block"
+        size="default"
+        type="submit"
+        [disabled]="verificationForm.invalid">
+        Vérifier&nbsp;
+        <span id="toLower"> le code </span>
+      </ion-button>
+    </ion-item>
+  </form>
+</ion-content>

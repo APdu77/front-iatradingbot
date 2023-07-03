@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { SplashScreen } from '@capacitor/splash-screen';
+import { StatusBar, Style } from '@capacitor/status-bar';
+import { Platform } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +10,12 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  rootPage:any = 'LoginPage';
+
+  constructor(platform: Platform) {
+    platform.ready().then(() => {
+      StatusBar.setStyle({ style: Style.Default });
+      SplashScreen.hide();
+    });
+  }
 }

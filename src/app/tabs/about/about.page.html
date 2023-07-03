@@ -1,0 +1,48 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start" *ngIf="isConnected==false">
+			<ion-back-button
+				id="toCap"
+				color="primary"
+				defaultHref="/login">
+			</ion-back-button>
+		</ion-buttons>
+		<ion-title>A propos</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-list>
+		<ion-item-group>
+			<ion-item-divider color="medium">
+				<ion-label> Parrainage </ion-label>
+			</ion-item-divider>
+
+			<ion-item lines="none">
+				<a (click)="openBrowser(urlSponsor)">
+					Créez votre compte Binance.com via mon lien de parrainage
+				</a>
+			</ion-item>
+		</ion-item-group>
+
+		<ion-item-group>
+			<ion-item-divider color="medium">
+				<ion-label> Tutoriels </ion-label>
+			</ion-item-divider>
+
+			<ion-item lines="none">
+				<a (click)="openBrowser(urlApiTutorial)">Apprenez à créer vos clés API</a>
+			</ion-item>
+		</ion-item-group>
+
+		<ion-item-group>
+			<ion-item-divider color="medium">
+				<ion-label> CryptoEcolo </ion-label>
+			</ion-item-divider>
+
+			<ion-item lines="none">
+				<a (click)="openBrowser(urlCryptoEcolo)">Visitez mon site CryptoEcolo</a>
+			</ion-item>
+		</ion-item-group>
+	</ion-list>
+</ion-content>

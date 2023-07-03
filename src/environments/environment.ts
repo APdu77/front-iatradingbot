@@ -3,7 +3,15 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  //baseUrl: {
+    baseUrl: 'http://localhost:8084',
+    production: false,
+  /*},
+  binanceApiUrl: {
+    apiUrl: 'https://api.binance.com',
+    production: false,
+    enableDebug: true,
+  }*/
 };
 
 /*
