@@ -26,7 +26,7 @@ export class AboutPage implements OnInit {
     this._configService.getUrl('cryptoEcolo').subscribe((url: any) => {
       this.urlCryptoEcolo = url;
     });
-    this._configService.getUrl('apiTutorial').subscribe(async (url: any) => {
+    this._configService.getUrl('apiTutorial').subscribe((url: any) => {
       this.urlApiTutorial = url;
     });
   }
