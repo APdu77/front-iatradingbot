@@ -32,7 +32,6 @@ export class AboutPage implements OnInit {
   }
 
   async openBrowser(url: string) {
-    console.log(url);
     await Browser.open({ url: url });
   }
 }

@@ -13,7 +13,7 @@ import { AboutPage } from './about.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    AboutPageRoutingModule
+    AboutPageRoutingModule,
   ],
   declarations: [AboutPage]
 })
