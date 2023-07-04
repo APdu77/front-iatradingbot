@@ -12,7 +12,7 @@ export function AuthenticationGuard(): CanActivateFn {
     const router = inject(Router);
     const navController = inject(NavController);
     if (
-      authenticationService.isConnected == true ||
+      authenticationService.isConnected == true &&
       localStorage.getItem('token') !== null
     ) {
       return true;

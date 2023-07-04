@@ -103,6 +103,7 @@ export class AccountPage implements OnInit {
           text: 'OK',
           handler: () => {
             this._navCtrl.navigateRoot('/login');
+            window.location.reload();
           },
         },
       ],
